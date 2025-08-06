@@ -1,0 +1,1 @@
+//Point d’entrée : affiche `views/index.php

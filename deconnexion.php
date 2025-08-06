@@ -1,0 +1,1 @@
+//Déconnecte et redirige vers l’accueil

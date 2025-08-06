@@ -1,0 +1,1 @@
+/* Gère inscription, connexion, déconnexion */
