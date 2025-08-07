@@ -19,35 +19,47 @@ $result = $conn->query("SELECT id, login, prenom, nom FROM utilisateurs");
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
+    <meta charset="UTF-8">
     <title>Admin - Liste des utilisateurs</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style/common.css">
+    <link rel="stylesheet" href="./style/admin.css">
 </head>
 
 <body>
-    <h1>Bienvenue admin 👑</h1>
-    <h2>Liste des utilisateurs :</h2>
+    <?php include 'includes/header.php'; ?>
 
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>ID</th>
-            <th>Login</th>
-            <th>Prénom</th>
-            <th>Nom</th>
-        </tr>
-        <?php while ($row = $result->fetch_assoc()): ?>
-            <tr>
-                <td><?= $row['id'] ?></td>
-                <td><?= htmlspecialchars($row['login']) ?></td>
-                <td><?= htmlspecialchars($row['prenom']) ?></td>
-                <td><?= htmlspecialchars($row['nom']) ?></td>
-            </tr>
-        <?php endwhile; ?>
-    </table>
+    <main class="admin">
+        <h1>Bienvenue admin 👑</h1>
+        <h2>Liste des utilisateurs</h2>
 
-    <p><a href="index.php">Retour à l’accueil</a></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Login</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <tr>
+                        <td><?= $row['id'] ?></td>
+                        <td><?= htmlspecialchars($row['login']) ?></td>
+                        <td><?= htmlspecialchars($row['prenom']) ?></td>
+                        <td><?= htmlspecialchars($row['nom']) ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+
+        <p><a class="btn" href="index.php">Retour à l’accueil</a></p>
+    </main>
+
+    <?php include 'includes/footer.php'; ?>
 </body>
 
 </html>

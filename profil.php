@@ -26,11 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nom = $_POST['nom'];
     $password = $_POST['password'];
 
-    // Vérification de base
     if (empty($login) || empty($prenom) || empty($nom)) {
         $erreur = "Veuillez remplir tous les champs (sauf mot de passe si inchangé).";
     } else {
-        // Mise à jour avec ou sans mot de passe
         if (!empty($password)) {
             $hashed = password_hash($password, PASSWORD_DEFAULT);
             $update = $conn->prepare("UPDATE utilisateurs SET login = ?, prenom = ?, nom = ?, password = ? WHERE id = ?");
@@ -53,33 +51,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
+    <meta charset="UTF-8">
     <title>Mon profil</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style/profil.css">
+    <link rel="stylesheet" href="./style/common.css">
 </head>
 
 <body>
-    <h1>Modifier mon profil</h1>
+    <?php include 'includes/header.php'; ?>
 
-    <?php if ($erreur): ?>
-        <p style="color:red"><?= $erreur ?></p>
-    <?php endif; ?>
+    <main class="profil">
+        <h1>Modifier mon profil</h1>
 
-    <?php if ($success): ?>
-        <p style="color:green"><?= $success ?></p>
-    <?php endif; ?>
+        <?php if ($erreur): ?>
+            <p class="error"><?= $erreur ?></p>
+        <?php endif; ?>
 
-    <form method="post">
-        <input type="text" name="login" value="<?= htmlspecialchars($user['login']) ?>" required><br>
-        <input type="text" name="prenom" value="<?= htmlspecialchars($user['prenom']) ?>" required><br>
-        <input type="text" name="nom" value="<?= htmlspecialchars($user['nom']) ?>" required><br>
-        <input type="password" name="password" placeholder="Nouveau mot de passe (facultatif)"><br>
-        <button type="submit">Mettre à jour</button>
-    </form>
+        <?php if ($success): ?>
+            <p class="success"><?= $success ?></p>
+        <?php endif; ?>
 
-    <p><a href="index.php">Retour à l'accueil</a></p>
+        <form method="post">
+            <label>Login :</label>
+            <input type="text" name="login" value="<?= htmlspecialchars($user['login']) ?>" required>
+
+            <label>Prénom :</label>
+            <input type="text" name="prenom" value="<?= htmlspecialchars($user['prenom']) ?>" required>
+
+            <label>Nom :</label>
+            <input type="text" name="nom" value="<?= htmlspecialchars($user['nom']) ?>" required>
+
+            <label>Nouveau mot de passe (facultatif) :</label>
+            <input type="password" name="password" placeholder="Laisser vide pour ne pas changer">
+
+            <button type="submit">Mettre à jour</button>
+        </form>
+
+        <p><a class="retour" href="index.php">← Retour à l'accueil</a></p>
+    </main>
+
+    <?php include 'includes/footer.php'; ?>
 </body>
 
 </html>
