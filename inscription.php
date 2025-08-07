@@ -50,25 +50,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <title>Inscription</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style/common.css">
+    <link rel="stylesheet" href="./style/inscription.css">
+
 </head>
 
 <body>
-    <h1>Inscription</h1>
-    <?php if ($erreur): ?>
-        <p style="color:red"><?= $erreur ?></p>
-    <?php endif; ?>
+    <?php include 'includes/header.php'; ?>
 
-    <form method="post">
-        <input type="text" name="login" placeholder="Login" required><br>
-        <input type="text" name="prenom" placeholder="Prénom" required><br>
-        <input type="text" name="nom" placeholder="Nom" required><br>
-        <input type="password" name="password" placeholder="Mot de passe" required><br>
-        <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required><br>
-        <button type="submit">S'inscrire</button>
-    </form>
+    <main>
+        <h1>Inscription</h1>
+        <?php if ($erreur): ?>
+            <p class="erreur"><?= $erreur ?></p>
+        <?php endif; ?>
 
-    <p><a href="index.php">Retour à l'accueil</a></p>
+        <form method="post" class="form-inscription">
+            <input type="text" name="login" placeholder="Login" required><br>
+            <input type="text" name="prenom" placeholder="Prénom" required><br>
+            <input type="text" name="nom" placeholder="Nom" required><br>
+            <input type="password" name="password" placeholder="Mot de passe" required><br>
+            <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required><br>
+            <button type="submit">S'inscrire</button>
+        </form>
+
+    </main>
+
+    <?php include 'includes/footer.php'; ?>
 </body>
+
 
 </html>
