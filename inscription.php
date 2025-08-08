@@ -73,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit">S'inscrire</button>
         </form>
 
+
     </main>
 
     <?php include 'includes/footer.php'; ?>
